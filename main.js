@@ -24,8 +24,8 @@ session.on("ready", () => {
 	console.log("Login successful");
 });
 app.get("/", (req, res) => {
-	//res.send("Hello World");
-	res.render('qr',{title:'test rendering'})
+	res.send("Hello World");
+	//res.render('qr',{title:'test rendering'})
 });
 app.get("/whatsapp/login", async (req, res) => {
 	if (tokenQr === null) return res.send("please try later");
