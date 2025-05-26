@@ -15,6 +15,7 @@ const session = new Client({
 	}),
 });
 let tokenQr = null;
+const run = async()=>{
 session.on("qr", (qr) => {
 	tokenQr = qr;
 	console.log("qr", qr);
@@ -23,11 +24,13 @@ session.on("ready", () => {
 	tokenQr = false;
 	console.log("Login successful");
 });
+}
 app.get("/", (req, res) => {
 	//res.render('qr',{title:'test rendering'})
 	res.send("Hello World");
 });
 app.get("/whatsapp/login", async (req, res) => {
+	await run();
 	if (tokenQr === null) return res.send("please try later");
 	if (tokenQr === false) return res.send("Login successful");
 	qr2.toDataURL(tokenQr, (err, src) => {
