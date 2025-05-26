@@ -24,12 +24,12 @@ session.on("ready", () => {
 	console.log("Login successful");
 });
 app.get("/", (req, res) => {
-	res.send("Hello World");
+	res.render('qr',{title:'test rendering'})
+	//res.send("Hello World");
 });
 app.get("/whatsapp/login", async (req, res) => {
-	//res.render('qr',{title:'test rendering'})
-	//if (tokenQr === null) return res.send("please try later");
-	//if (tokenQr === false) return res.send("Login successful");
+	if (tokenQr === null) return res.send("please try later");
+	if (tokenQr === false) return res.send("Login successful");
 	qr2.toDataURL(tokenQr, (err, src) => {
 		if (err) return res.status(500).send("Error occured");
 		return res.render("qr", {img: src});
