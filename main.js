@@ -23,13 +23,13 @@ session.on("ready", () => {
 	tokenQr = false;
 	console.log("Login successful");
 });
-res.render('qr',{title:'test rendering'})
 app.get("/", (req, res) => {
 	res.send("Hello World");
 });
 app.get("/whatsapp/login", async (req, res) => {
-	if (tokenQr === null) return res.send("please try later");
-	if (tokenQr === false) return res.send("Login successful");
+	//res.render('qr',{title:'test rendering'})
+	//if (tokenQr === null) return res.send("please try later");
+	//if (tokenQr === false) return res.send("Login successful");
 	qr2.toDataURL(tokenQr, (err, src) => {
 		if (err) return res.status(500).send("Error occured");
 		return res.render("qr", {img: src});
